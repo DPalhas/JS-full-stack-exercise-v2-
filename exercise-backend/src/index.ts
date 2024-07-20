@@ -6,8 +6,9 @@ import express,{Application} from "express";
 import {ApolloServer} from "apollo-server-express";
 import {buildSchema} from "type-graphql";
 import {validate} from "graphql/validation";
-import {HelloResolver} from "./resolvers/hello";
+import { SLResolver} from "./resolvers/securityList";
 import "reflect-metadata";
+import {SDResolver} from "./resolvers/securityDetails";
 
 const main = async () => {
     const orm = await MikroORM.init(microConfig);
@@ -19,9 +20,10 @@ const main = async () => {
     const app: Application = express();
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [HelloResolver],
+            resolvers: [SLResolver,SDResolver],
             validate: false
-        })
+        }),
+        context: () => ({ em: orm.em.fork() })
     });
     await apolloServer.start();
     apolloServer.applyMiddleware({ app });
