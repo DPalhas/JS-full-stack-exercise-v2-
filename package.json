@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "apollo-server-express": "^3.13.0",
+    "graphql": "^16.9.0",
+    "type-graphql": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
+  }
+}
