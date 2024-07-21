@@ -12,6 +12,10 @@ export class Prices {
 
   @Field()
   @Property()
+  ticker!: string;
+
+  @Field()
+  @Property()
   date!: string;
 
   @Field()
