@@ -11,7 +11,7 @@ export class Securities {
 
   @Field()
   @Property()
-  securityName!: string;
+  securityname!: string;
 
   @Field()
   @Property()

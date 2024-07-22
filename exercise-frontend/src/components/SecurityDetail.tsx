@@ -42,7 +42,7 @@ const SecurityDetail: React.FC = () => {
   if (!security || !prices) return <p>Security not found.</p>;
 
   const chartOptions = {
-    title: { text: `${security.securityName} Stock Price` },
+    title: { text: `${security.securityname} Stock Price` },
     series: [
       {
         name: 'Close Price',
@@ -68,7 +68,7 @@ const SecurityDetail: React.FC = () => {
 
   return (
     <Paper style={{ padding: 16 }}>
-      <Typography variant="h4">{security.securityName}</Typography>
+      <Typography variant="h4">{security.securityname}</Typography>
       <Typography variant="subtitle1">Symbol: {security.ticker}</Typography>
       <Typography variant="subtitle1">Sector: {security.sector}</Typography>
       <Typography variant="subtitle1">Country: {security.country}</Typography>

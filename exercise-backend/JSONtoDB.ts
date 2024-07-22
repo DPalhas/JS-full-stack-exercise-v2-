@@ -2,9 +2,10 @@ import fs from 'fs';
 import { Pool } from 'pg';
 
 interface Price {
+  ticker: string;
   date: string;
-  close: string;
-  volume: string;
+  close: number;
+  volume: number;
 }
 
 interface Security {
@@ -46,8 +47,8 @@ const insertData = async () => {
         await pool.query(pricesQuery, [
           security.ticker,
           price.date,
-          price.close,
-          price.volume,
+          parseFloat(price.close.toString()),
+          parseFloat(price.volume.toString()),
         ]);
       }
     }
@@ -61,4 +62,5 @@ const insertData = async () => {
     pool.end();
   }
 };
+
 insertData();

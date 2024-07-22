@@ -19,10 +19,10 @@ export class Prices {
   date!: string;
 
   @Field()
-  @Property()
-  close!: string;
+  @Property({ type: 'numeric', precision: 10, scale: 4 })
+  close!: number;
 
   @Field()
-  @Property()
-  volume!: string;
+  @Property({ type: 'numeric', precision: 10, scale: 4 })
+  volume!: number;
 }

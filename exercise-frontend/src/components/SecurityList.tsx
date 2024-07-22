@@ -14,7 +14,7 @@ export const GET_SECURITIES = gql`
     securities {
       country
       sector
-      securityName
+      securityname
       ticker
       trend
     }
@@ -23,7 +23,7 @@ export const GET_SECURITIES = gql`
 
 export interface Security{
   ticker: string;
-  securityName: string;
+  securityname: string;
   sector: string;
   country: string;
   trend: number;
@@ -64,10 +64,10 @@ const SecurityList: React.FC = () => {
           {data?.securities.map((security) => (
             <TableRow key={security.ticker} component={Link} to={`/securities/${security.ticker}`} style={{ textDecoration: 'none' }}>
               <TableCell>{security.ticker}</TableCell>
-              <TableCell>{security.securityName}</TableCell>
+              <TableCell>{security.securityname}</TableCell>
               <TableCell>{security.sector}</TableCell>
               <TableCell>{security.country}</TableCell>
-              <TableCell style={{ backgroundColor: getTrendColor(security.trend) }}>{security.trend}</TableCell>
+              <TableCell style={{ backgroundColor: getTrendColor(security.trend), color: 'white' }}>{security.trend}</TableCell>
             </TableRow>
           ))}
         </TableBody>
