@@ -1,11 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Security, GET_SECURITIES } from './SecurityList';
+import {Button} from "@mui/material";
 
 const GET_PRICES = gql`
   {
@@ -67,13 +68,15 @@ const SecurityDetail: React.FC = () => {
   };
 
   return (
-    <Paper style={{ padding: 16 }}>
-      <Typography variant="h4">{security.securityname}</Typography>
-      <Typography variant="subtitle1">Symbol: {security.ticker}</Typography>
-      <Typography variant="subtitle1">Sector: {security.sector}</Typography>
-      <Typography variant="subtitle1">Country: {security.country}</Typography>
-      {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions} />}
-    </Paper>
+      <Paper style={{padding: 16}} elevation={0}>
+        <Typography variant="h4">Securities</Typography><br/>
+        <Typography variant="subtitle1">{security.ticker} - {security.securityname}</Typography><br/>
+        <Typography variant="subtitle1">Sector: {security.sector}</Typography>
+        <Typography variant="subtitle1">Country: {security.country}</Typography><br/>
+        {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions}/>}<br/>
+        <Button component={Link} to="/" variant="contained" color="primary"
+                style={{marginTop: 16, backgroundColor: 'black'}}>Back</Button>
+      </Paper>
   );
 };
 

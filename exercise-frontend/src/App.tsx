@@ -8,6 +8,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<SecurityList />} />
+          <Route path="/securities" element={<SecurityList />} />
         <Route path="/securities/:symbol" element={<SecurityDetail />} />
       </Routes>
     </Router>
