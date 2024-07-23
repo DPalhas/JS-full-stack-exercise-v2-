@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Security, GET_SECURITIES } from './SecurityList';
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 
 const GET_PRICES = gql`
   {
@@ -38,12 +38,15 @@ const SecurityDetail: React.FC = () => {
   if (errorPrices) return <p>Error: {errorPrices.message}</p>;
 
   const security = dataSecurities?.securities.find(sec => sec.ticker === symbol);
-  const prices = dataPrices?.prices.filter(price => price.ticker === symbol);
+  let prices = dataPrices?.prices.filter(price => price.ticker === symbol);
 
   if (!security || !prices) return <p>Security not found.</p>;
 
+  // Sort prices by date in ascending order
+  prices = prices.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
   const chartOptions = {
-    title: { text: `${security.securityname} Stock Price` },
+    title: { text: `${security.securityname} Detailed Chart` },
     series: [
       {
         name: 'Close Price',
@@ -68,15 +71,15 @@ const SecurityDetail: React.FC = () => {
   };
 
   return (
-      <Paper style={{padding: 16}} elevation={0}>
-        <Typography variant="h4">Securities</Typography><br/>
-        <Typography variant="subtitle1">{security.ticker} - {security.securityname}</Typography><br/>
-        <Typography variant="subtitle1">Sector: {security.sector}</Typography>
-        <Typography variant="subtitle1">Country: {security.country}</Typography><br/>
-        {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions}/>}<br/>
-        <Button component={Link} to="/" variant="contained" color="primary"
-                style={{marginTop: 16, backgroundColor: 'black'}}>Back</Button>
-      </Paper>
+    <Paper style={{ padding: 16 }} elevation={0}>
+      <Typography variant="h4">Securities</Typography><br/>
+      <Typography variant="subtitle1">{security.ticker} - {security.securityname}</Typography><br/>
+      <Typography variant="subtitle1">Sector: {security.sector}</Typography>
+      <Typography variant="subtitle1">Country: {security.country}</Typography><br/>
+      {chartOptions && <HighchartsReact highcharts={Highcharts} options={chartOptions} />}<br/>
+      <Button component={Link} to="/" variant="contained" color="primary"
+              style={{ marginTop: 16, backgroundColor: 'black' }}>Back</Button>
+    </Paper>
   );
 };
 
