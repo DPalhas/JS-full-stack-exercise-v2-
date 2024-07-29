@@ -49,7 +49,7 @@ const SecurityDetail: React.FC = () => {
     title: { text: `${security.securityname} Detailed Chart` },
     series: [
       {
-        name: 'Close Price',
+        name: 'Stock',
         data: prices.map(item => item.close),
       },
       {
@@ -61,7 +61,7 @@ const SecurityDetail: React.FC = () => {
     xAxis: { categories: prices.map(item => item.date) },
     yAxis: [
       {
-        title: { text: 'Close Price' },
+        title: { text: 'Stock' },
       },
       {
         title: { text: 'Volume' },
